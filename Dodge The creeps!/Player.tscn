@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://dodge_assets/art/playerGrey_walk2.png" type="Texture" id=2]
+[ext_resource path="res://dodge_assets/art/playerGrey_up1.png" type="Texture" id=3]
+[ext_resource path="res://dodge_assets/art/playerGrey_walk1.png" type="Texture" id=4]
+[ext_resource path="res://dodge_assets/art/playerGrey_up2.png" type="Texture" id=5]
+[ext_resource path="res://dodge_assets/art/trail.png" type="Texture" id=6]
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+spread = 1.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.2
+angle = 60.0
+angle_random = 0.6
+scale = 0.3
+color = Color( 0.831373, 0.831373, 0.831373, 0.372549 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 16.0279
+height = 8.63744
+
+[node name="Player" type="Area2D"]
+position = Vector2( -0.5, 0.5 )
+gravity = 0.0
+collision_mask = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="PlayerTrail" type="Particles2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+emitting = false
+amount = 15
+lifetime = 0.5
+randomness = 0.2
+fixed_fps = 25
+local_coords = false
+process_material = SubResource( 3 )
+texture = ExtResource( 6 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.3, 0.3 )
+frames = SubResource( 1 )
+animation = "up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Hit_invicibility" type="Timer" parent="."]
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+[connection signal="timeout" from="Hit_invicibility" to="." method="_on_Hit_invicibility_timeout"]
