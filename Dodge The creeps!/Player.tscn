@@ -7,7 +7,7 @@
 [ext_resource path="res://dodge_assets/art/playerGrey_up2.png" type="Texture" id=5]
 [ext_resource path="res://dodge_assets/art/trail.png" type="Texture" id=6]
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=1]
 flag_disable_z = true
 spread = 1.0
 gravity = Vector3( 0, 0, 0 )
@@ -19,7 +19,7 @@ angle_random = 0.6
 scale = 0.3
 color = Color( 0.831373, 0.831373, 0.831373, 0.372549 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 5 ) ],
 "loop": true,
@@ -32,7 +32,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 16.0279
 height = 8.63744
 
@@ -53,16 +53,16 @@ lifetime = 0.5
 randomness = 0.2
 fixed_fps = 25
 local_coords = false
-process_material = SubResource( 3 )
+process_material = SubResource( 1 )
 texture = ExtResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.3, 0.3 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 animation = "up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Hit_invicibility" type="Timer" parent="."]
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
