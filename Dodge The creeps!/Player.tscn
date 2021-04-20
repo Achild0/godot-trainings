@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://dodge_assets/art/playerGrey_walk2.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://dodge_assets/art/playerGrey_walk1.png" type="Texture" id=4]
 [ext_resource path="res://dodge_assets/art/playerGrey_up2.png" type="Texture" id=5]
 [ext_resource path="res://dodge_assets/art/trail.png" type="Texture" id=6]
+[ext_resource path="res://dodge_assets/art/playerGrey_dead1.png" type="Texture" id=7]
+[ext_resource path="res://dodge_assets/art/playerGrey_dead2.png" type="Texture" id=8]
 
 [sub_resource type="ParticlesMaterial" id=1]
 flag_disable_z = true
@@ -24,12 +26,17 @@ animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "up",
-"speed": 5.0
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "dead",
+"speed": 3.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "walk",
-"speed": 5.0
+"speed": 3.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=3]
@@ -39,13 +46,13 @@ height = 8.63744
 [node name="Player" type="Area2D"]
 position = Vector2( -0.5, 0.5 )
 gravity = 0.0
-collision_mask = 0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="PlayerTrail" type="Particles2D" parent="."]
+light_mask = 2
 scale = Vector2( 0.5, 0.5 )
 emitting = false
 amount = 15
@@ -60,6 +67,8 @@ texture = ExtResource( 6 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 2 )
 animation = "up"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="AnimatedSprite"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )

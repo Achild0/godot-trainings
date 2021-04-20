@@ -10,7 +10,8 @@ export var max_speed = 215
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var mob_types = $AnimatedSprite.frames.get_animation_names()
-	$AnimationSprite.animation = mob_types[randi() % mob_types.size()]
+	$AnimatedSprite.animation = mob_types[randi() % mob_types.size()]
+	$AnimatedSprite.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

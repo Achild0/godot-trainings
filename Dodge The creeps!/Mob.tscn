@@ -30,14 +30,18 @@ animations = [ {
 radius = 14.7692
 height = 11.7481
 
-[node name="Mob" type="RigidBody2D"]
+[node name="Mob" type="RigidBody2D" groups=[
+"Mob",
+]]
 collision_mask = 0
+gravity_scale = 0.0
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 2
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 1 )
 animation = "swim"
